@@ -4,29 +4,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
 
-public class Manager{
+public class Manager {
     private HashMap<Integer, Task> tasks = new HashMap<>();
     private HashMap<Integer, Epic> epics = new HashMap<>();
     private HashMap<Integer, Subtask> subtasks = new HashMap<>();
-    private int currentId = 1;
+
+    private int taskId = 1;
+    private int epicId = 1;
+    private int subtaskId = 1;
 
     public void createTask(Task task) {
-        task.setId(currentId++);
+        task.setId(taskId++);
         tasks.put(task.getId(), task);
     }
 
     public void createEpic(Epic epic) {
-        epic.setId(currentId++);
+        epic.setId(epicId++);
         epics.put(epic.getId(), epic);
     }
 
     public void createSubtask(Subtask subtask) {
-        subtask.setId(currentId++);
+        subtask.setId(subtaskId++);
         subtasks.put(subtask.getId(), subtask);
+
         Epic epic = epics.get(subtask.getEpicId());
         if (epic != null) {
             epic.getSubtasks().add(subtask);
             updateEpicStatus(epic);
+        } else {
+            System.out.println("Epic with ID " + subtask.getEpicId() + " does not exist.");
         }
     }
 

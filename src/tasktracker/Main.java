@@ -10,14 +10,12 @@ public class Main {
         manager.createTask(task2);
 
         Epic epic1 = new Epic("Epic 1", "Description for Epic 1");
-        Subtask subtask1 = new Subtask("Subtask 1", "Description for Subtask 1", Status.NEW, epic1.getId());
-        Subtask subtask2 = new Subtask("Subtask 2", "Description for Subtask 2", Status.DONE, epic1.getId());
-
-        epic1.addSubtask(subtask1);
-        epic1.addSubtask(subtask2);
-
         manager.createEpic(epic1);
+
+        Subtask subtask1 = new Subtask("Subtask 1", "Description for Subtask 1", Status.NEW, epic1.getId());
         manager.createSubtask(subtask1);
+
+        Subtask subtask2 = new Subtask("Subtask 2", "Description for Subtask 2", Status.DONE, epic1.getId());
         manager.createSubtask(subtask2);
 
         System.out.println(manager.getAllTasks());
